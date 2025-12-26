@@ -8,6 +8,12 @@ import { EggIcon } from "@/components/EggIcon";
 import confetti from "canvas-confetti";
 import Joyride, { CallBackProps, STATUS, Step } from "react-joyride";
 
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
+
 export default function Home() {
   const { address } = useAccount();
   const [eggsToBuy, setEggsToBuy] = useState(1);
@@ -137,12 +143,34 @@ export default function Home() {
   };
 
   const handleSellAnt = (id: bigint) => {
-    sellAnt({ 
-      address: CRYPTO_ANTS_ADDRESS, 
-      abi: cryptoAntsABI, 
-      functionName: "sellAnt", 
-      args: [id] 
+    sellAnt({
+      address: CRYPTO_ANTS_ADDRESS,
+      abi: cryptoAntsABI,
+      functionName: "sellAnt",
+      args: [id]
     });
+  };
+
+  const addEggTokenToWallet = async () => {
+    try {
+      const wasAdded = await window.ethereum?.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: EGG_ADDRESS,
+            symbol: 'EGG',
+            decimals: 0,
+            image: 'https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/1f95a.png',
+          },
+        },
+      });
+      if (wasAdded) {
+        console.log('EGG token added to wallet!');
+      }
+    } catch (error) {
+      console.error('Failed to add EGG token:', error);
+    }
   };
 
   return (
@@ -212,6 +240,52 @@ export default function Home() {
           </div>
         )}
       </header>
+
+      {address && (
+        <div className="card" style={{ marginBottom: '2rem' }}>
+          <h2>🔗 Contract Info</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+            <div>
+              <h3 style={{ fontSize: '0.9rem', color: 'var(--accent-secondary)', marginBottom: '0.5rem' }}>🥚 EGG Token (ERC20)</h3>
+              <p style={{ fontSize: '0.8rem', wordBreak: 'break-all', marginBottom: '0.75rem', color: '#aaa' }}>
+                {EGG_ADDRESS}
+              </p>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <button className="button" style={{ fontSize: '0.6rem', padding: '0.6rem 1rem' }} onClick={addEggTokenToWallet}>
+                  Add to Wallet
+                </button>
+                <a
+                  href={`https://sepolia.etherscan.io/token/${EGG_ADDRESS}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button"
+                  style={{ fontSize: '0.6rem', padding: '0.6rem 1rem', textDecoration: 'none' }}
+                >
+                  View on Etherscan
+                </a>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '0.9rem', color: 'var(--accent-secondary)', marginBottom: '0.5rem' }}>🐜 CryptoAnts (ERC721)</h3>
+              <p style={{ fontSize: '0.8rem', wordBreak: 'break-all', marginBottom: '0.75rem', color: '#aaa' }}>
+                {CRYPTO_ANTS_ADDRESS}
+              </p>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <a
+                  href={`https://sepolia.etherscan.io/address/${CRYPTO_ANTS_ADDRESS}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button"
+                  style={{ fontSize: '0.6rem', padding: '0.6rem 1rem', textDecoration: 'none' }}
+                >
+                  View on Etherscan
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
 
       {address ? (
         <main className="main-grid">

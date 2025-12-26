@@ -143,6 +143,33 @@ dapp/
 - ~~CryptoAnts: `0x8F022fA4fbbb90eCbDFbBe4ea285b41ED91C1aC6`~~ ❌
 - ~~Egg: `0x17b8EF9acFfcFfde6F3b884aAf0936c9cDa096F4`~~ ❌
 
+### 💼 Add Tokens to Your Wallet
+
+#### Add Egg Token (ERC20) to MetaMask
+
+1. Open MetaMask and select Sepolia network
+2. Click "Import tokens" at the bottom
+3. Enter the token details:
+   - **Token Contract Address:** `0x9b9f9965F2C3a8E4870B532d972634F7FC3D73A2`
+   - **Token Symbol:** `EGG`
+   - **Token Decimals:** `0` (eggs are indivisible)
+4. Click "Add Custom Token" and confirm
+
+#### Add CryptoAnts NFT Collection
+
+1. Open MetaMask and select Sepolia network
+2. Go to the NFTs tab
+3. Click "Import NFT"
+4. Enter:
+   - **Address:** `0x314A85646A7676d0Ad683013F6a835E0E5F522aA`
+   - **Token ID:** (the ID of your ant, starting from 0)
+5. Click "Add" to see your ant NFT
+
+#### Verify on Etherscan
+
+- **CryptoAnts Contract:** [View on Sepolia Etherscan](https://sepolia.etherscan.io/address/0x314a85646a7676d0ad683013f6a835e0e5f522aa)
+- **Egg Token Contract:** [View on Sepolia Etherscan](https://sepolia.etherscan.io/address/0x9b9f9965f2c3a8e4870b532d972634f7fc3d73a2)
+
 ## 🔐 Security Features
 
 This application interacts with audited smart contracts that have:
