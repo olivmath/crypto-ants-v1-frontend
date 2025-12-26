@@ -153,7 +153,7 @@ This application interacts with audited smart contracts that have:
 - ✅ Formal verification completed
 - ✅ Production-ready deployment
 
-Full security audit: [SECURITY.md](../SECURITY.md)
+Full security audit: [SECURITY.md](./SECURITY.md)
 
 ## 🎨 Design Philosophy
 
