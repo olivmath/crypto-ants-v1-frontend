@@ -339,3 +339,23 @@ div[data-rk] * {
   width: min(900px, 95vw);
   margin: 0 auto;
 }
+
+/* Faucet Button Animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.faucet-button {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.faucet-button:hover {
+  animation: none !important;
+  transform: translate(-2px, -2px) !important;
+}

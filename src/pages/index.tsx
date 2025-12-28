@@ -237,6 +237,24 @@ export default function Home() {
         {address && (
           <div className="tutorial-controls">
             <button className="button" onClick={() => setRunTutorial(true)}>Review tutorial</button>
+            {ethBalance && Number(ethBalance.formatted) < 0.01 && (
+              <a
+                href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button faucet-button"
+                style={{
+                  background: 'linear-gradient(135deg, #00ddff 0%, #00ff88 100%)',
+                  color: '#000',
+                  fontWeight: 'bold',
+                  animation: 'pulse 2s infinite',
+                  border: '4px solid #fff',
+                  boxShadow: '0 0 20px rgba(0, 221, 255, 0.6), 4px 4px 0px #000'
+                }}
+              >
+                🚰 Get Sepolia ETH
+              </a>
+            )}
           </div>
         )}
       </header>
